@@ -13,4 +13,11 @@ router.route('/')
           res.json({ users });
         });
   });
+
+router.route('/create')
+  .post((req, res) => {
+    new User({
+      name: req.body.
+    })
+  });
 module.exports = router;
