@@ -1,9 +1,11 @@
 'use strict';
 
-const bookshelf = require('../bookshelf');
+const Bookshelf = require('./bookshelf');
+const Promise   = require('bluebird');
+const crypto    = require('crypto');
 
-const User = bookshelf.Model.extend({
-  tableName: 'users',
+const User = Bookshelf.Model.extend({
+  tableName: 'users'
 });
 
 module.exports = User;
