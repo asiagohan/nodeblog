@@ -1,20 +1,16 @@
 'use strict';
 
 const express = require('express');
+const controller = require('../controllers/user');
 const router = express.Router();
 
-const User = require('../models/user');
-
 router.route('/')
-  .get((req, res) => {
-      User
-        .fetchAll()
-        .then(function(users) {
-          res.json({ users });
-        });
-  });
+  .get(controller.getUsers);
+
+router.route('/:id')
+  .get(controller.getUser);
 
 router.route('/create')
-  .post((req, res) => {
-  });
+  .post(controller.postCreate);
+
 module.exports = router;
