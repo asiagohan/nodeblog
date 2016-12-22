@@ -14,6 +14,11 @@ app.use('/', index);
 const user = require('./routes/user');
 app.use('/users', user);
 
+const blog = require('./routes/blog');
+app.use('/blogs', blog);
+
+const item = require('./routes/item');
+app.use('/items', item);
 
 // config
 // for reference elsewhere in nodeblog, set global variable
