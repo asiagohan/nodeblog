@@ -1,14 +1,14 @@
 const __ = require('underscore');
 const Bookshelf = require('../db/bookshelf');
-const Item = require('../models/item');
+const Comment = require('../models/comment');
 const Promise = require('bluebird');
 
-const ItemCollection = Bookshelf.Collection.extend({
-  model: Item,
+const CommentCollection = Bookshelf.Collection.extend({
+  model: Comment,
 }, {
-  getList: function(blog_id){
+  getList: function(item_id){
     return new this()
-      .query('where', 'blog_id', '=', blog_id)
+      .query('where', 'item_id', '=', item_id)
       .fetch()
       .then (function (collection){
         return collection.toJSON();
@@ -19,4 +19,4 @@ const ItemCollection = Bookshelf.Collection.extend({
   }
 });
 
-module.exports = ItemCollection;
+module.exports = CommentCollection;

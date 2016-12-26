@@ -20,6 +20,8 @@ app.use('/blogs', blog);
 const item = require('./routes/item');
 app.use('/items', item);
 
+const comment = require('./routes/comment');
+app.use('/comments', comment);
 // config
 // for reference elsewhere in nodeblog, set global variable
 const config = require('./config')();
