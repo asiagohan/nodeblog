@@ -29,6 +29,9 @@ app.use('/comments', comment);
 // for reference elsewhere in nodeblog, set global variable
 const config = require('./config')();
 
-app.listen(config.port, function () {
-  console.log('started');
-})
+module.exports = app;
+if (!module.parent) {
+  app.listen(config.port, function () {
+    console.log('started');
+  })
+}
