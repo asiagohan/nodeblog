@@ -1,6 +1,8 @@
 'use strict';
 
-const common_config = {};
+const common_config = {
+  saltRound: 10
+};
 const config = {
   development: {
     env: 'development',
