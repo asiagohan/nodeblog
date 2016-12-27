@@ -1,6 +1,6 @@
 'use strict';
 
-const Bookshelf = require('../db/bookshelf');
+const Bookshelf = require('../bookshelf');
 const Promise   = require('bluebird');
 const crypto    = require('crypto');
 
