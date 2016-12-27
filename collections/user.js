@@ -1,5 +1,5 @@
 const __ = require('underscore');
-const Bookshelf = require('../db/bookshelf');
+const Bookshelf = require('../bookshelf');
 const User = require('../models/user');
 const Promise = require('bluebird');
 

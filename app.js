@@ -11,23 +11,28 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(expressValidator([]));
 
 // routing
-const index = require('./routes/index');
-app.use('/', index);
 
-const user = require('./routes/user');
-app.use('/users', user);
+// public
+const public_user = require('./routes/public/user');
+app.use('/users', public_user); 
 
-const blog = require('./routes/blog');
-app.use('/blogs', blog);
+// api
+const api_user = require('./routes/api/user');
+app.use('/api/users', api_user);
 
-const item = require('./routes/item');
-app.use('/items', item);
+const api_blog = require('./routes/api/blog');
+app.use('/api/blogs', api_blog);
 
-const comment = require('./routes/comment');
-app.use('/comments', comment);
+const api_item = require('./routes/api/item');
+app.use('/api/items', api_item);
+
+const api_comment = require('./routes/api/comment');
+app.use('/api/comments', api_comment);
+
 // config
-// for reference elsewhere in nodeblog, set global variable
 const config = require('./config')();
+
+app.set('view engine', 'jade');
 
 module.exports = app;
 if (!module.parent) {

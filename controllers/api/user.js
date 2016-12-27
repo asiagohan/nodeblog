@@ -4,9 +4,9 @@ const Promise = require('bluebird');
 const __      = require('underscore');
 const bcrypt  = require('bcrypt');
 
-const User           = require('../models/user');
-const UserCollection = require('../collections/user');
-const config         = require('../config')();
+const User           = require('../../models/user');
+const UserCollection = require('../../collections/user');
+const config         = require('../../config')();
 
 const getUser = function(req, res){
   const id = req.params.id;

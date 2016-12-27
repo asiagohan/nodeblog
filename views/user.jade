@@ -1,0 +1,44 @@
+extends layout
+
+block scripts
+  script(type='text/javascript').
+      var getUser = function(){$.get('/api/users', function (res) {
+        $('#users').empty();
+        res.forEach(function (user){
+          $('#users').append('<li>' + user.id + ':' + user.name + '</li>');
+        });
+      })};
+      var createUser = function(){$.post('/api/users/create', {
+        name: $("#name").val(),
+        email: $("#email").val(),
+        password: $("#password").val() 
+        })
+        .done( function (res){
+          getUser();
+          $('#name').val('');
+          $('#email').val('');
+          $('#password').val('');
+        })
+        .fail(function(xhr, status, error){
+          alert('error');
+        })
+      };
+      $(function(){
+        getUser();
+      });
+block content
+  h2 user
+  #container
+      ul(id="users")
+      form.form-create(role='create')
+      .form-group
+        label(for="name") name
+        input(type="text", name="name", id="name")
+      .form-group
+        label(for="email") Email 
+        input(type="text", name="email", id="email")
+      .form-group
+        label(for="password") Password
+        input(type="password", name="password", id="password")
+      button.btn.btn-primary(type="submit", onClick="createUser()") create
+

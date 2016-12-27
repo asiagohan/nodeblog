@@ -1,7 +1,7 @@
 'use strict';
 
-const Item = require('../models/item');
-const ItemCollection = require('../collections/item');
+const Item = require('../../models/item');
+const ItemCollection = require('../../collections/item');
 const Promise = require('bluebird');
 const moment = require('moment');
 

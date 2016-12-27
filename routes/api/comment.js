@@ -1,14 +1,14 @@
 'use strict';
 
 const express = require('express');
-const controller = require('../controllers/blog');
+const controller = require('../../controllers/api/comment');
 const router = express.Router();
 
 router.route('/')
-  .get(controller.getBlogs);
+  .get(controller.getComments);
 
 router.route('/:id')
-  .get(controller.getBlog);
+  .get(controller.getComment);
 
 router.route('/create')
   .post(controller.postCreate);

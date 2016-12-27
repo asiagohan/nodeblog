@@ -1,7 +1,7 @@
 'use strict';
 
-const Blog = require('../models/blog');
-const BlogCollection = require('../collections/blog');
+const Blog = require('../../models/blog');
+const BlogCollection = require('../../collections/blog');
 const Promise = require('bluebird');
 
 const getBlog = function(req, res){
