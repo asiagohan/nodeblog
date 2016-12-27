@@ -3,6 +3,7 @@
 const User = require('../models/user');
 const UserCollection = require('../collections/user');
 const Promise = require('bluebird');
+const __ = require('underscore');
 
 const getUser = function(req, res){
   const id = req.params.id;
@@ -27,18 +28,27 @@ const getUsers = function(req, res) {
 };
 
 const postCreate = function(req, res) {
-  console.log(req.body);
-  new User({
-    email: req.body.email,
-    name:  req.body.name,
-    password: req.body.password
-  })
-  .save()
-  .then(function (user){
-    res.json(user.id);
-  })
-  .catch (function(error){
-    res.status(500).json({msg: error.message});
+  // validation
+  req.checkBody('email', 'Enter a valid email').notEmpty().isEmail();
+  req.checkBody('name', 'Enter your name').notEmpty().isLength({min: 1, max: 20});
+  req.checkBody('password', 'Enter your password').notEmpty().isLength({min: 1, max: 20});
+  req.getValidationResult().then(function (result){
+    if (!result.isEmpty()) {
+      res.status(500).json({msg: 'Validation Error:' + __.map(result.array(), function(error){ return error.param + ':' + error.msg; }).join(',')});
+      return;
+    }
+    new User({
+      email: req.body.email,
+      name:  req.body.name,
+      password: req.body.password
+    })
+    .save()
+    .then(function (user){
+      res.json(user.id);
+    })
+    .catch (function(error){
+      res.status(500).json({msg: error.message});
+    });
   });
 };
 

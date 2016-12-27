@@ -5,8 +5,11 @@ const app = express();
 
 // modules
 const bodyParser = require('body-parser');
+const expressValidator = require('express-validator');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressValidator([]));
+
 // routing
 const index = require('./routes/index');
 app.use('/', index);
