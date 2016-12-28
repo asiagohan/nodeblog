@@ -1,0 +1,39 @@
+extends layout
+
+block scripts
+  script(type='text/javascript').
+      var getBlog = function(){$.get('/api/blogs', function (res) {
+        $('#blogs').empty();
+        res.forEach(function (blog){
+          $('#blogs').append('<li><a href="/items?blog_id=' + blog.id + '">' + blog.title + '</a></li>');
+        });
+      })};
+      var createBlog = function(){$.post('/api/blogs/create', {
+        user_id: $("#user_id").val(),
+        title: $("#title").val(),
+        })
+        .done( function (res){
+          getBlog();
+          $('#user_id').val('');
+          $('#title').val('');
+        })
+        .fail(function(xhr, status, error){
+          alert('error');
+        })
+      };
+      $(function(){
+        getBlog();
+      });
+block content
+  h2 blog
+  #container
+      ul(id="blogs")
+      form.form-create(role='create')
+      .form-group
+        label(for="user_id") user id
+        input(type="text", name="user_id", id="user_id")
+      .form-group
+        label(for="title") blog title
+        input(type="text", name="title", id="title")
+      button.btn.btn-primary(type="submit", onClick="createBlog()") create
+

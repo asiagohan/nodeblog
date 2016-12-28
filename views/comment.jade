@@ -1,0 +1,55 @@
+extends layout
+
+block scripts
+  script(type='text/javascript').
+      var getParam = function(){
+        var search = $(location).attr('search');
+        search = search.replace(/\?/g, '');
+        var params = search.split('&');
+        var data = [];
+        for (i=0; i < params.length; i++) {
+          var pair = params[i].split('=');
+          data[pair[0]] = pair[1];
+        }
+        return data;
+      };
+      var getComment = function(){
+        var data = getParam();
+        $.get('/api/comments?item_id=' + data['item_id'], function (res) {
+        $('#comments').empty();
+        res.forEach(function (comment){
+          $('#comments').append('<li>' + comment.name + ':' + comment.text + '</li>');
+        });
+      })};
+      var addComment = function(){
+        var data = getParam();
+        $.post('/api/comments/create', {
+        item_id: data['item_id'],
+        name: $("#name").val(),
+        text: $("#text").val(),
+        })
+        .done( function (res){
+          getComment();
+          $('#name').val('');
+          $('#text').val('');
+        })
+        .fail(function(xhr, status, error){
+          alert('error');
+        })
+      };
+      $(function(){
+        getComment();
+      });
+block content
+  h2 comment
+  #container
+      ul(id="comments")
+      form.form-create(role='create')
+      .form-group
+        label(for="name") name 
+        input(type="text", name="name", id="name")
+      .form-group
+        label(for="text") text
+        textarea(name="text", id="text")
+      button.btn.btn-primary(type="submit", onClick="addComment()") create
+

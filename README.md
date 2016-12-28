@@ -20,5 +20,5 @@ nodeblog is a sample app written in Node.js.
 ## comments
 - GET /comments - get a collection of comments. req params: item_id. res params:[].id, [].name, [].text, [].created_at, [].updated_at
 - GET /comments/:id - get one comment. res params:id, name, text, created_at, updated_at
-- POST /comments/create - create a new comment. req params:name, text. res params:id
+- POST /comments/create - create a new comment. req params:item_id, name, text. res params:id
 

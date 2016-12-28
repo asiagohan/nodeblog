@@ -18,7 +18,7 @@ const getItem = function(req, res){
 };
 
 const getItems = function(req, res) {
-  ItemCollection.getList(req.body.blog_id)
+  ItemCollection.getList(req.query.blog_id)
     .then(function (items){
       res.json(items);
     })

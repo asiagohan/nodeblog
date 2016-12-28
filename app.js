@@ -16,6 +16,15 @@ app.use(expressValidator([]));
 const public_user = require('./routes/public/user');
 app.use('/users', public_user); 
 
+const public_blog = require('./routes/public/blog');
+app.use('/blogs', public_blog); 
+
+const public_item = require('./routes/public/item');
+app.use('/items', public_item); 
+
+const public_comment = require('./routes/public/comment');
+app.use('/comments', public_comment); 
+
 // api
 const api_user = require('./routes/api/user');
 app.use('/api/users', api_user);

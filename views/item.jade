@@ -1,0 +1,55 @@
+extends layout
+
+block scripts
+  script(type='text/javascript').
+      var getParam = function(){
+        var search = $(location).attr('search');
+        search = search.replace(/\?/g, '');
+        var params = search.split('&');
+        var data = [];
+        for (i=0; i < params.length; i++) {
+          var pair = params[i].split('=');
+          data[pair[0]] = pair[1];
+        }
+        return data;
+      };
+      var getItem = function(){
+        var data = getParam();
+        $.get('/api/items?blog_id=' + data['blog_id'], function (res) {
+        $('#items').empty();
+        res.forEach(function (item){
+          $('#items').append('<li><a href="/comments?item_id=' + item.id + '">' + item.title + '</a>:' + item.text + '</li>');
+        });
+      })};
+      var createItem = function(){
+        var data = getParam();
+        $.post('/api/items/create', {
+        blog_id: data['blog_id'],
+        title: $("#title").val(),
+        text: $("#text").val(),
+        })
+        .done( function (res){
+          getItem();
+          $('#title').val('');
+          $('#text').val('');
+        })
+        .fail(function(xhr, status, error){
+          alert('error');
+        })
+      };
+      $(function(){
+        getItem();
+      });
+block content
+  h2 item
+  #container
+      ul(id="items")
+      form.form-create(role='create')
+      .form-group
+        label(for="title") title
+        input(type="text", name="title", id="title")
+      .form-group
+        label(for="text") text
+        textarea(name="text", id="text")
+      button.btn.btn-primary(type="submit", onClick="createItem()") create
+
