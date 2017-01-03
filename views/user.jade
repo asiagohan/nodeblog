@@ -20,6 +20,7 @@ block scripts
           $('#password').val('');
         })
         .fail(function(xhr, status, error){
+          console.log(xhr);
           alert('error');
         })
       };
