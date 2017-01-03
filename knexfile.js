@@ -22,16 +22,17 @@ module.exports = {
   staging: {
     client: 'postgresql',
     connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
+      host:     process.env.DATABASE_URL,
+      database: 'nodeblog',
+      user:     'nodeblog',
+      password: 'nodeblog'
     },
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      tableName: 'migrations'
     }
   },
 

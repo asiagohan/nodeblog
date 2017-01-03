@@ -39,7 +39,7 @@ const api_comment = require('./routes/api/comment');
 app.use('/api/comments', api_comment);
 
 // config
-const config = require('./config')();
+const config = require('./config')(process.env.ENV);
 
 app.set('view engine', 'jade');
 
