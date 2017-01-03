@@ -6,7 +6,7 @@ const bcrypt  = require('bcrypt');
 
 const User           = require('../../models/user');
 const UserCollection = require('../../collections/user');
-const config         = require('../../config')();
+const config         = require('../../config')(process.env.ENV);
 
 const getUser = function(req, res){
   const id = req.params.id;
