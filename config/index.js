@@ -11,7 +11,7 @@ const config = {
   },
   staging: {
     env: 'staging',
-    port: 8080,
+    port: process.env.PORT,
     config: common_config
   },
   production: {
